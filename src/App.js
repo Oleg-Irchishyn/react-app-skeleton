@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from './assets/images/logo.svg';
+import styles from './App.module.css'
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { initializeApp } from './redux/appReducer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+/* React Lazy example
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/ProfileContainer'));
+*/
+
+class App extends React.Component {
+  componentDidMount() {
+  }
+  render() {
+    return (
+      <div className={styles.App}>
+        <img alt="App-logo" className={styles.AppLogo} src={logo} />
+        <Switch>
+          <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+          {/* <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} /> - React Suspense example*/}
+        </Switch>
+      </div>
+    )
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initializeApp: () => {
+      dispatch(initializeApp());
+    }
+  }
+}
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter)
+  (App);
+
