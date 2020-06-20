@@ -1,8 +1,8 @@
 ﻿import React from 'react';
 import preLoader from "./../../../assets/images/preloader.gif";
-import styles from './Preloader.module.css';
+import styles from './Preloader.module.scss';
 
-let PreloaderImg = (props) => {
+let Preloader = (props) => {
   return (
     <div className={styles.preLoaderWrapper} style={{ backgroundColor: 'white' }}>
       <img className={styles.preLoaderWrapperImg} alt="preloader" src={preLoader} />
@@ -10,4 +10,4 @@ let PreloaderImg = (props) => {
   )
 }
 
-export default PreloaderImg;
+export default Preloader;
