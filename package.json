@@ -2,7 +2,7 @@
   "name": "react-skeleton-build",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://oleg-irchishyn.github.io/React-tutorial",
+  "homepage": "https://oleg-irchishyn.github.io/react-app-skeleton",
   "dependencies": {
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
