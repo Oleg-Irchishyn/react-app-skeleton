@@ -4,9 +4,10 @@ import styles from './App.module.scss'
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { compose } from 'redux';
-import { initializeApp } from './redux/appReducer';
-import { initializeAppSelector } from './redux/appSelectors';
+import { compose, bindActionCreators } from 'redux';
+import *as appActions from './redux/reducers/appReducer';
+import { initializeApp } from './redux/reducers/appReducer';
+import { initializeAppSelector } from './redux/selectors/appSelectors';
 import Preloader from './components/common/Preloader/Preloader';
 
 /* React Lazy example
@@ -15,9 +16,11 @@ const DialogsContainer = React.lazy(() => import('./components/Dialogs/ProfileCo
 
 class App extends React.Component {
   componentDidMount() {
+    initializeApp();
   }
   render() {
-    if (!this.props.initialized) {
+    const { initialized } = this.props;
+    if (!initialized) {
       return <Preloader />
     }
     return (
@@ -36,13 +39,10 @@ const mapStateToProps = (state) => ({
   initialized: initializeAppSelector(state)
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    initializeApp: () => {
-      dispatch(initializeApp());
-    }
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  ...bindActionCreators(appActions, dispatch)
+})
+
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
