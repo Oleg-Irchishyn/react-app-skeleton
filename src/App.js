@@ -9,6 +9,7 @@ import *as appActions from './redux/reducers/appReducer';
 import { initializeApp } from './redux/reducers/appReducer';
 import { initializeAppSelector } from './redux/selectors/appSelectors';
 import Preloader from './components/common/Preloader/Preloader';
+import PropTypes from 'prop-types';
 
 /* React Lazy example
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/ProfileContainer'));
@@ -43,6 +44,10 @@ const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators(appActions, dispatch)
 })
 
+App.propTypes = {
+  initialized: PropTypes.bool.isRequired,
+  initializeApp: PropTypes.func.isRequired
+}
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
