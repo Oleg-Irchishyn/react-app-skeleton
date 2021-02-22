@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
+import { AppStateType } from "../store";
 
-const initializeApp = (state) => {
+const initializeApp = (state: AppStateType) => {
   return state.app.initialized;
 }
 
