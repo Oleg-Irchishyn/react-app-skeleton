@@ -3,7 +3,7 @@ const INITIALIZED_SUCCESS = 'SK/APP/INITIALIZED_SUCCESS';
 
 
 let initialState = {
-  initialized: false
+  initialized: false as boolean
 }
 
 const appReducer = (state = initialState, action: ActionsTypes):initialStateType=> {
