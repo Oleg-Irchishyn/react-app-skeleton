@@ -15,28 +15,27 @@ const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileCo
 const SuspendedProfile = withSuspense(ProfileContainer);
 */
 
-const App: React.FC<MapStatePropsType & MapDispatchPropsType> = ({
-  initializeApp,
-  initialized,
-}) => {
-  React.useEffect(() => {
-    initializeApp();
-  }, []);
+const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
+  ({ initializeApp, initialized }) => {
+    React.useEffect(() => {
+      initializeApp();
+    }, []);
 
-  if (!initialized) {
-    return <Preloader />;
-  }
+    if (!initialized) {
+      return <Preloader />;
+    }
 
-  return (
-    <div className={styles.App}>
-      <img alt="App-logo" className={styles.AppLogo} src={logo} />
-      <Switch>
-        <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-        {/*<Route path="/profile/:userId?" render={() => <SuspendedProfile />} />*/}
-      </Switch>
-    </div>
-  );
-};
+    return (
+      <div className={styles.App}>
+        <img alt="App-logo" className={styles.AppLogo} src={logo} />
+        <Switch>
+          <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+          {/*<Route path="/profile/:userId?" render={() => <SuspendedProfile />} />*/}
+        </Switch>
+      </div>
+    );
+  },
+);
 
 const mapStateToProps = (state: AppStateType) => ({
   initialized: initializeAppSelector(state),

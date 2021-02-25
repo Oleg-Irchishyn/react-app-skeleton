@@ -1,4 +1,5 @@
-import { InferActionsTypes } from './../store';
+import { ThunkDispatch } from 'redux-thunk';
+import { AppStateType, InferActionsTypes } from './../store';
 const INITIALIZED_SUCCESS = 'SK/APP/INITIALIZED_SUCCESS';
 
 
@@ -23,11 +24,12 @@ export const actions = {
   initializedSuccess: () => ({type: INITIALIZED_SUCCESS} as const)
 }
 
-export const initializeApp = () => (dispatch: any) => {
+export const initializeApp = () => (dispatch: ThunkDispatchType) => {
   dispatch(actions.initializedSuccess());
 }
 
 export type initialStateType = typeof initialState;
 type ActionsTypes = InferActionsTypes<typeof actions>;
+type ThunkDispatchType = ThunkDispatch<AppStateType, {}, ActionsTypes>
 
 export default appReducer;
