@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { initializeAppSelector } from './redux/selectors/appSelectors';
-import Preloader from './components/common/Preloader/Preloader';
+import { Preloader, SliderExample } from './components/common';
 import { AppStateType } from './redux/store';
 import { initializeApp } from './redux/reducers/appReducer';
 
@@ -25,9 +25,18 @@ const App: React.FC<MapStatePropsType & MapDispatchPropsType> = React.memo(
       return <Preloader />;
     }
 
+    let sliderSettings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
+
     return (
       <div className={styles.App}>
         <img alt="App-logo" className={styles.AppLogo} src={logo} />
+        <SliderExample />
         <Switch>
           <Route path="*" render={() => <div>404 NOT FOUND</div>} />
           {/*<Route path="/profile/:userId?" render={() => <SuspendedProfile />} />*/}
